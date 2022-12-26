@@ -19,7 +19,7 @@ def create_app():
     db.init_app(app)
 
     #cors
-    CORS(app)
+    CORS(app,supports_credentials=True)
 
     with app.app_context():
         db.create_all()

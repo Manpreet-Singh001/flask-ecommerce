@@ -41,8 +41,10 @@ def signup():
 
     return jsonify({'success': True})
 
+
 @admin.post('/logout')
 def logout():
+    print(session)
     session.clear()
     return jsonify({'success': True})
 
