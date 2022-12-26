@@ -1,26 +1,25 @@
 from flask import Flask
 from extensions import db
-from flask_bcrypt import Bcrypt
 from products import product
+from admin import admin
+from flask_cors import CORS
 from products.model import Product
+from admin.model import Admin
 
-bcrypt = None
+
 def create_app():
     app = Flask(__name__)
 
     # configure the SQLite database, relative to the app instance folder
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project1.db"
     app.register_blueprint(product, url_prefix='/product')
-
-    app.config.update(
-        TESTING=True,
-        SECRET_KEY='192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf'
-    )
+    app.register_blueprint(admin, url_prefix='/admin')
+    app.config.from_object('config')
 
     # initialize the app with the extension
     db.init_app(app)
 
-    bcrypt = Bcrypt(app)
+    #cors
+    CORS(app)
 
     with app.app_context():
         db.create_all()
