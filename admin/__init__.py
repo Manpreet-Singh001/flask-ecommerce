@@ -13,6 +13,9 @@ def login():
     if email is None or password is None:
         return jsonify({'success': False}), 401
 
+    if not check_password(email, password):
+        return jsonify({'success': False}), 401
+
     session['email'] = email
     session['logged_in'] = True
 
