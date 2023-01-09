@@ -25,7 +25,6 @@ def login():
 @admin.post('/signup')
 def signup():
     data = request.json
-    print(data)
     username = data.get('username', None)
     email = data.get('email', None)
     password = data.get('password', None)
@@ -44,7 +43,6 @@ def signup():
 
 @admin.post('/logout')
 def logout():
-    print(session)
     session.clear()
     return jsonify({'success': True})
 

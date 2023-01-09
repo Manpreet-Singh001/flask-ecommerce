@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from flask import Flask
 from extensions import db
 from products import product
@@ -14,6 +16,7 @@ def create_app():
     app.register_blueprint(product, url_prefix='/product')
     app.register_blueprint(admin, url_prefix='/admin')
     app.config.from_object('config')
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=60)
 
     # initialize the app with the extension
     db.init_app(app)

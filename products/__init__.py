@@ -3,6 +3,7 @@ from flask import Blueprint, jsonify
 
 product = Blueprint('product', __name__)
 
+
 # get all the products
 @product.get('/')
 def get_all_products():
